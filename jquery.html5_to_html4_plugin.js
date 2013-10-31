@@ -32,11 +32,21 @@ $(document).ready(function(){
                     atributosElemento=atributosElemento+" "+attr.name+"='"+attr.value+"'";
                 }
             }
-            if(localStorage){
-                var ContenidoHTML4aInsertar;
+           if(localStorage){
+                var ContenidoHTML4aInsertar
+                //SI NO SE ENCONTRO EL ATRIBUTO CLASS SE CREA EL ATRIBUTO CLASS CON LA CLASE DEL ELEMENTO
                 if(elementoClase!==null){
-                    ContenidoHTML4aInsertar="<div class="+"'"+nombreElementoSeleccionadoMinuscula+" "+elementoClase+" "+atributosElemento+"> "+ContenidoElementoSeleccionado+" </div>";   
-                }else{
+                    ContenidoHTML4aInsertar="<div class="+"'"+nombreElementoSeleccionadoMinuscula+" "+elementoClase+" "+atributosElemento+"> "+ContenidoElementoSeleccionado+" </div>";
+                    //CREAMOS LA DTD 
+                    var newDoctype = document.implementation.createDocumentType(
+                        'html',
+                        '-//W3C//DTD XHTML 1.0 Transitional//EN',
+                        'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtdd'
+                        );
+                        //CAMBIAMOS LA DTD HTML5 A L A DTD XHMTL4.1
+                    document.doctype.parentNode.replaceChild(newDoctype,document.doctype);
+                }//SI ENCUENTRA EL ATRIBUTO CLASS SE CONCATENA LA CLASE DEL ELEMENTO
+                else{
                     ContenidoHTML4aInsertar="<div class="+"'"+nombreElementoSeleccionadoMinuscula+"' "+atributosElemento+"> "+ContenidoElementoSeleccionado+" </div>";
                 }
                 //insertamos el contenido de html4 como un hermano de el anterior elemento
